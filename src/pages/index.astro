@@ -1,0 +1,33 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SignupForm from '../components/SignupForm.astro';
+import { pillars } from '../data/pillars';
+
+const articles = (await getCollection('artikel')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0, 5);
+const base = import.meta.env.BASE_URL;
+const pillarName = Object.fromEntries(pillars.map((p) => [p.slug, p.title]));
+---
+<BaseLayout>
+  <section class="hero"><div class="wrap">
+    <span class="eyebrow">Playbook kerja · Bahasa Indonesia</span>
+    <h1>Berhenti Jadi Penulis Prompt.<br /><em>Mulai Jadi Manajer Tim AI.</em></h1>
+    <p class="lead">Sistem praktis untuk mendelegasikan pekerjaan kepada AI—dengan peran jelas, SOP yang bisa diulang, dan standar hasil yang dapat diperiksa.</p>
+    <div class="actions"><a class="btn" href="#playbook" data-event="cta_click" data-label="hero_download">Unduh playbook gratis ↓</a><a class="btn secondary" href={`${base}pilar/eksperimen-7-hari/`} data-event="cta_click" data-label="hero_experiment">Mulai eksperimen 7 hari →</a></div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="section-head"><div><span class="eyebrow">Empat jalur belajar</span><h2>Pilih rute kerjamu.</h2></div><p>Mulai dari eksperimen, ubah pelajaran menjadi SOP, tempatkan manusia sebagai pengarah, lalu buka catatan prosesnya.</p></div>
+    <div class="grid">{pillars.map((pillar) => <a class="card" href={`${base}pilar/${pillar.slug}/`}><span class="number">{pillar.number}</span><span class="tag">{pillar.promise}</span><h3>{pillar.title}</h3><p>{pillar.description}</p><strong>Buka pilar →</strong></a>)}</div>
+  </div></section>
+
+  <section class="articles"><div class="wrap">
+    <div class="section-head"><div><span class="eyebrow">Terbaru</span><h2>Catatan dari lapangan.</h2></div></div>
+    <div class="article-list">{articles.map((article) => <a class="article-row" href={`${base}artikel/${article.id}/`}><span class="tag">{pillarName[article.data.pilar]}</span><div><h3>{article.data.title}</h3><span class="muted">{article.data.description}</span></div><span class="muted">{article.data.minutes} menit →</span></a>)}</div>
+  </div></section>
+
+  <section id="playbook"><div class="wrap"><div class="magnet">
+    <div><span class="eyebrow">Gratis · PDF</span><h2>Playbook SOP Delegasi Pertamamu</h2><p class="lead">Kerangka ringkas untuk membangun SOP delegasi AI yang dapat digunakan ulang.</p><ul><li>Template peran, konteks, langkah, dan standar hasil</li><li>Checklist evaluasi tujuh hari</li><li>Rubrik keputusan: pakai, perbaiki, atau buang</li></ul><a class="btn secondary" href={`${base}playbook-sop-delegasi.pdf`} download data-event="pdf_download" data-label="lead_magnet">Unduh PDF langsung ↓</a></div>
+    <SignupForm />
+  </div></div></section>
+</BaseLayout>

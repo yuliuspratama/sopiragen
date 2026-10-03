@@ -1,0 +1,64 @@
+---
+import '../styles/global.css';
+import { pillars } from '../data/pillars';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'SopirAgen — Manajer Tim AI',
+  description = 'Playbook dan eksperimen berbahasa Indonesia untuk mengelola AI sebagai tim.'
+} = Astro.props;
+const base = import.meta.env.BASE_URL;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#12141a" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href={`${base}favicon.svg`} type="image/svg+xml" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap nav">
+        <a class="brand" href={base} aria-label="SopirAgen, beranda"><span>Sopir</span>Agen</a>
+        <nav aria-label="Navigasi utama">
+          {pillars.map((pillar) => <a href={`${base}pilar/${pillar.slug}/`}>{pillar.short}</a>)}
+          <a href={`${base}tentang/`}>Tentang</a>
+        </nav>
+      </div>
+    </header>
+    <main><slot /></main>
+    <footer>
+      <div class="wrap footer-grid">
+        <div><a class="brand" href={base}><span>Sopir</span>Agen</a><p>Manusia memegang kemudi. AI membantu menjalankan rute.</p></div>
+        <div><strong>Empat pilar</strong>{pillars.map((pillar) => <a href={`${base}pilar/${pillar.slug}/`}>{pillar.title}</a>)}</div>
+        <div><strong>Hubungi</strong><a href="mailto:halo@sopiragen.id">halo@sopiragen.id</a><a href={`${base}privasi/`}>Privasi</a></div>
+      </div>
+      <p class="fine">© 2026 SopirAgen · Dibangun manusia + tim AI.</p>
+    </footer>
+    <script is:inline>
+      const track = (name, props = {}) => {
+        window.saEvents = window.saEvents || [];
+        window.saEvents.push({ name, props, at: new Date().toISOString() });
+        window.dispatchEvent(new CustomEvent('sopiragen:event', { detail: { name, props } }));
+      };
+      window.saTrack = track;
+      document.addEventListener('click', (event) => {
+        const target = event.target.closest('[data-event]');
+        if (target) track(target.dataset.event, { label: target.dataset.label || target.textContent.trim(), href: target.href || '' });
+      });
+      if (location.hostname !== 'localhost' && !sessionStorage.getItem('sa_session')) {
+        sessionStorage.setItem('sa_session', '1');
+        track('organic_session', { referrer: document.referrer || 'direct', path: location.pathname });
+      }
+    </script>
+  </body>
+</html>

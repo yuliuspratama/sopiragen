@@ -1,0 +1,19 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { pillars } from '../../data/pillars';
+
+export function getStaticPaths() {
+  return pillars.map((pillar) => ({ params: { slug: pillar.slug }, props: { pillar } }));
+}
+const { pillar } = Astro.props;
+const articles = (await getCollection('artikel', ({ data }) => data.pilar === pillar.slug)).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const base = import.meta.env.BASE_URL;
+---
+<BaseLayout title={`${pillar.title} — SopirAgen`} description={pillar.description}>
+  <section class="pillar-hero"><div class="wrap"><span class="eyebrow">Pilar {pillar.number}</span><h1>{pillar.title}</h1><p class="lead">{pillar.description}</p><p><strong>{pillar.promise}</strong></p></div></section>
+  <section class="articles"><div class="wrap">
+    <div class="section-head"><div><span class="eyebrow">Bacaan pilar</span><h2>Mulai dari sini.</h2></div></div>
+    <div class="article-list">{articles.length ? articles.map((article) => <a class="article-row" href={`${base}artikel/${article.id}/`}><span class="tag">{new Intl.DateTimeFormat('id-ID',{dateStyle:'medium'}).format(article.data.date)}</span><div><h3>{article.data.title}</h3><span class="muted">{article.data.description}</span></div><span class="muted">{article.data.minutes} menit →</span></a>) : <div class="article-row"><span class="tag">Segera</span><div><h3>Catatan pertama sedang disiapkan.</h3><span class="muted">Daftar di beranda untuk menerima kabarnya.</span></div></div>}</div>
+  </div></section>
+</BaseLayout>

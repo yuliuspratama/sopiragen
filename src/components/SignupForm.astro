@@ -1,0 +1,28 @@
+---
+interface Props { compact?: boolean }
+const { compact = false } = Astro.props;
+---
+<form class:list={['signup', { compact }]} data-signup>
+  <label for={compact ? 'email-compact' : 'email'}>Email kerja</label>
+  <div class="form-row">
+    <input id={compact ? 'email-compact' : 'email'} name="email" type="email" autocomplete="email" placeholder="kamu@contoh.com" required />
+    <button type="submit">Kirim playbook →</button>
+  </div>
+  <p class="form-note">Tanpa spam. Berhenti kapan saja.</p>
+  <p class="form-status" role="status" aria-live="polite"></p>
+</form>
+<script>
+  document.querySelectorAll<HTMLFormElement>('[data-signup]').forEach((form) => {
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const data = new FormData(form);
+      const email = String(data.get('email') || '');
+      const subject = encodeURIComponent('Daftar Playbook SopirAgen');
+      const body = encodeURIComponent(`Halo SopirAgen,\n\nSaya ingin menerima Playbook SOP Delegasi.\nEmail: ${email}`);
+      window.saTrack?.('email_signup', { domain: email.split('@')[1] || 'unknown' });
+      const status = form.querySelector<HTMLElement>('.form-status');
+      if (status) status.textContent = 'Aplikasi email dibuka. Kirim pesan untuk menuntaskan pendaftaran.';
+      window.location.href = `mailto:halo@sopiragen.id?subject=${subject}&body=${body}`;
+    });
+  });
+</script>

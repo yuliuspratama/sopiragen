@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anatomi SOP AI: Peran, Konteks, Langkah, Standar — SopirAgen</title>
+  <meta name="description" content="SOP adalah unit terkecil dari agen yang berguna. Kerangka 4 bagian plus template siap pakai.">
+  <link rel="icon" href="../img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../css/gaya.css">
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap nav">
+    <a class="brand" href="../index.html"><span class="logo">🚕</span> SopirAgen</a>
+    <nav class="links">
+      <a href="../playbook.html">Playbook</a>
+      <a href="../eksperimen.html">Eksperimen</a>
+      <a href="../tentang.html">Tentang</a>
+      <a href="../index.html#magnet">PDF Gratis</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap artikel-head">
+  <div class="crumb"><a href="../playbook.html">Playbook</a> / Playbook SOP AI</div>
+  <h1>Anatomi SOP AI: Peran, Konteks, Langkah, Standar</h1>
+  <div class="meta"><span>Pilar 2 · Playbook SOP</span><span>10 menit baca</span><span>Okt 2026</span></div>
+</div>
+
+<div class="artikel-body">
+
+  <p>Coba ingat percakapan AI-mu yang paling memuaskan tahun ini. Ada kemungkinan besar itu bukan karena prompt-mu puitis — tapi karena kamu, sadar atau tidak, sudah memberi empat hal: siapa AI-nya harus berpikir sebagai, apa latar belakang masalahnya, urutan kerjanya, dan bentuk hasil akhirnya.</p>
+  <p>Empat hal itu adalah seluruh isi dari SOP untuk agen. Sisanya detail. Artikel ini membedah keempatnya satu per satu, lalu memberi template yang bisa kamu salin hari ini.</p>
+
+  <h2>1. Peran — "kamu adalah..."</h2>
+  <p>Peran menentukan kualitas default. Agen tanpa peran menjawab seperti ensiklopedia; agen dengan peran menjawab seperti kolega.</p>
+  <p>Peran yang baik punya tiga komponen:</p>
+  <ul>
+    <li><strong>Identitas fungsional</strong>: bukan "kamu adalah AI yang membantu", tapi "kamu adalah analis riset pasar untuk UMKM kuliner".</li>
+    <li><strong>Keahlian yang disebut eksplisit</strong>: "kamu terbiasa membaca data penjualan harian dan mengenali pola musiman".</li>
+    <li><strong>Sikap kerja</strong>: "kamu bertanya dulu kalau datanya kurang, bukan menebak lalu menyajikan tebakan sebagai temuan".</li>
+  </ul>
+  <p>Satuan peran yang paling berguna adalah satu tugas — bukan satu bidang. "Analis riset pasar" terlalu lebar; "periset harga kompetitor untuk menu kopi" adalah peran yang langsung bisa dipakai.</p>
+
+  <h2>2. Konteks — "ini situasinya..."</h2>
+  <p>Konteks adalah semua yang manusia baru akan tahu kalau duduk di mejamu. Agen tidak akan pernah mengetahuinya kecuali kamu menuliskannya. Minimal:</p>
+  <ul>
+    <li>Untuk siapa hasil kerja ini (audiens + tingkat pengetahuan mereka)</li>
+    <li>Keputusan apa yang akan diambil dari hasil kerja ini</li>
+    <li>Batas-batas: anggaran, waktu, merek, hal yang tidak boleh diusulkan</li>
+    <li>Sumber data yang dipercaya vs yang tidak</li>
+  </ul>
+  <blockquote><p>Konteks yang ditulis sekali di SOP menggantikan konteks yang dijelaskan ulang di setiap percakapan.</p></blockquote>
+
+  <h2>3. Langkah — "kerjakan begini..."</h2>
+  <p>Inilah bagian yang paling sering dilewatkan, dan paling banyak menyelamatkan. Langkah membuat hasil agen bisa direproduksi: sama tugas, sama urutan, hasil yang bisa dibandingkan antar pekan.</p>
+  <p>Langkah yang baik:</p>
+  <ul>
+    <li>Urutan eksplisit, bernomor, tanpa kata yang ambigu ("analisis dengan baik" bukan langkah; "urutkan produk berdasarkan margin lalu tandai 3 terbawah" adalah langkah)</li>
+    <li>Menyebut di mana agen harus <em>berhenti dan bertanya</em> — titik keputusan yang kamu ingin pegang sendiri</li>
+    <li>Menyebut format output di akhir setiap langkah besar</li>
+  </ul>
+
+  <h2>4. Standar — "hasilnya seperti ini..."</h2>
+  <p>Standar adalah bagaimana kamu menilai tanpa harus membaca ulang semua hasil. Bentuknya konkret:</p>
+  <ul>
+    <li><strong>Format</strong>: tabel dengan kolom tertentu, paragraf maksimal N, bahasa Indonesia ragam bisnis</li>
+    <li><strong>Contoh positif</strong>: satu contoh hasil yang kamu anggap "layak langsung dipakai"</li>
+    <li><strong>Contoh negatif</strong>: satu contoh kesalahan yang sering terjadi dan harus dihindari</li>
+    <li><strong>Batas keras</strong>: "jangan pernah mengarang angka; kalau data tidak ada, tulis 'data tidak tersedia'"</li>
+  </ul>
+  <p>Batas keras itu penting: agen yang mengarang angka dengan percaya diri lebih berbahaya daripada agen yang mengaku tidak tahu.</p>
+
+  <h2>Template siap salin</h2>
+  <pre><code># SOP: [nama tugas]
+
+## Peran
+Kamu adalah [peran spesifik satu tugas].
+Keahlian: [yang kamu kuasai].
+Sikap kerja: [termasuk: bertanya saat data kurang].
+
+## Konteks
+- Audiens hasil: [siapa, pengetahuan mereka]
+- Keputusan yang digiring: [apa]
+- Batas: [waktu/anggaran/merek/hal terlarang]
+- Sumber dipercaya: [daftar]
+
+## Langkah
+1. [langkah konkret + output tiap langkah]
+2. ...
+3. TITIK HENTI: [keputusan yang kamu tunda ke manusia]
+
+## Standar hasil
+- Format: [tabel/paragraf/panjang/bahasa]
+- Contoh layak pakai: [contoh]
+- Jangan: [kesalahan umum]
+- Batas keras: [yang tidak boleh dilanggar]</code></pre>
+
+  <h2>Uji cepat: apakah SOP-mu lulus?</h2>
+  <ol>
+    <li><strong>Uji orang kedua</strong>: berikan SOP tanpa penjelasan tambahan ke rekan (atau sesi AI baru). Kalau mereka bisa menghasilkan hasil yang mirip, SOP lulus.</li>
+    <li><strong>Uji minggu depan</strong>: buka lagi SOP-mu tujuh hari kemudian. Kalau kamu langsung paham tanpa membaca ulang dua kali, lulus.</li>
+    <li><strong>Uji kegagalan</strong>: kalau agen gagal, apakah kamu tahu bagian SOP mana yang menyebabkannya? SOP yang baik selalu bisa diaudit.</li>
+  </ol>
+
+  <h2>Yang berikut</h2>
+  <p>Setelah SOP pertamamu jalan, lanjut ke <a href="menulis-brief-untuk-agen.html">Menulis Brief untuk Agen</a> — untuk tugas sekali jalan yang belum naik status jadi SOP. Dan mulai Eksperimen 7 Hari <a href="eksperimen-7-hari-tingkat-1.html">Tingkat 1</a> untuk menguji di tugas nyata.</p>
+
+  <div class="cta-bawah">
+    <h3>📥 Playbook PDF Gratis</h3>
+    <p>Template SOP ini plus lembar eksperimen 7 hari dan daftar 20 tugas delegasi — dalam satu PDF siap cetak.</p>
+    <a class="btn btn-primary" href="../pdf/sopiragen-playbook-delegasi.pdf" download>Unduh Playbook Delegasi (PDF)</a>
+  </div>
+
+</div>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="fine">
+      <span>© 2026 SopirAgen.</span>
+      <span><a href="../playbook.html">← Semua artikel</a></span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
