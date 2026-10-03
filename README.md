@@ -50,6 +50,14 @@ Tidak ada cookie, fingerprinting, atau pengiriman ke pihak ketiga. Integrasi ana
 
 ## Deploy
 
-Workflow `.github/workflows/deploy.yml` membangun dan menerbitkan ke GitHub Pages setiap push ke `main`. Untuk repository project page, workflow memasang `SITE_URL=https://OWNER.github.io` dan `BASE_PATH=/REPOSITORY`.
+GitHub Pages memakai branch `gh-pages`. Jalankan pemeriksaan dan buat build project-page:
 
-Di GitHub buka **Settings → Pages → Build and deployment → Source: GitHub Actions**, lalu push ke `main`. URL publik berbentuk `https://OWNER.github.io/REPOSITORY/`.
+```bash
+BASE_PATH=/sopiragen SITE_URL=https://yuliuspratama.github.io npm run build
+git add -f dist && git commit -m "Build public release"
+git subtree split --prefix dist -b gh-pages-release
+git push origin gh-pages-release:gh-pages --force
+git branch -D gh-pages-release
+```
+
+Setiap push ke `gh-pages` memicu pipeline Pages bawaan GitHub. Status dapat dilihat di **Settings → Pages**. Situs produksi: <https://yuliuspratama.github.io/sopiragen/>.
