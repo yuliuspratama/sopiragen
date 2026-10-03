@@ -46,7 +46,7 @@ Event ringan disimpan di `window.saEvents` dan dipancarkan sebagai event DOM `so
 - `pdf_download`
 - `email_signup`
 
-Tidak ada cookie, fingerprinting, atau pengiriman ke pihak ketiga. Integrasi analytics dapat mendengarkan event tersebut tanpa mengubah komponen CTA.
+Event disimpan lokal (maksimum 100 entri) di `localStorage.sopiragen_events` agar dapat diverifikasi di DevTools, tanpa cookie, fingerprinting, atau pengiriman ke pihak ketiga. Integrasi analytics dapat mendengarkan event tersebut tanpa mengubah komponen CTA.
 
 ## Deploy
 

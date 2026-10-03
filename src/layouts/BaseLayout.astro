@@ -47,8 +47,13 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <script is:inline>
       const track = (name, props = {}) => {
         window.saEvents = window.saEvents || [];
-        window.saEvents.push({ name, props, at: new Date().toISOString() });
-        window.dispatchEvent(new CustomEvent('sopiragen:event', { detail: { name, props } }));
+        const event = { name, props, at: new Date().toISOString() };
+        window.saEvents.push(event);
+        try {
+          const history = JSON.parse(localStorage.getItem('sopiragen_events') || '[]');
+          localStorage.setItem('sopiragen_events', JSON.stringify([...history.slice(-99), event]));
+        } catch { /* Analytics tidak boleh mengganggu navigasi. */ }
+        window.dispatchEvent(new CustomEvent('sopiragen:event', { detail: event }));
       };
       window.saTrack = track;
       document.addEventListener('click', (event) => {
