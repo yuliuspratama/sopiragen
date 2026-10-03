@@ -2,8 +2,13 @@
 </style></head><body><header class="site-header"><div class="wrap nav"><a class="brand" href="/sopiragen/" aria-label="SopirAgen, beranda"><span>Sopir</span>Agen</a><nav aria-label="Navigasi utama"><a href="/sopiragen/pilar/eksperimen-7-hari/">Eksperimen</a><a href="/sopiragen/pilar/playbook-sop-ai/">Playbook</a><a href="/sopiragen/pilar/kantor-manusia/">Kantor Manusia</a><a href="/sopiragen/pilar/studio-log/">Studio Log</a><a href="/sopiragen/tentang/">Tentang</a></nav></div></header><main><article class="prose"><span class="eyebrow">Privasi</span><h1>Pengukuran tanpa mengintai.</h1><p>SopirAgen mencatat event produk minimum di browser—kunjungan sesi, klik CTA, unduhan PDF, dan signup—tanpa cookie iklan atau fingerprinting. Versi awal tidak mengirim data pribadi ke pihak ketiga.</p><p>Pendaftaran email menggunakan aplikasi email milik pengunjung, sehingga alamat hanya dikirim ketika pengguna menekan tombol kirim. Untuk pertanyaan atau penghapusan data, hubungi <a href="mailto:halo@sopiragen.id">halo@sopiragen.id</a>.</p></article></main><footer><div class="wrap footer-grid"><div><a class="brand" href="/sopiragen/"><span>Sopir</span>Agen</a><p>Manusia memegang kemudi. AI membantu menjalankan rute.</p></div><div><strong>Empat pilar</strong><a href="/sopiragen/pilar/eksperimen-7-hari/">Eksperimen 7 Hari</a><a href="/sopiragen/pilar/playbook-sop-ai/">Playbook SOP AI</a><a href="/sopiragen/pilar/kantor-manusia/">Kantor Manusia</a><a href="/sopiragen/pilar/studio-log/">Studio Log</a></div><div><strong>Hubungi</strong><a href="mailto:halo@sopiragen.id">halo@sopiragen.id</a><a href="/sopiragen/privasi/">Privasi</a></div></div><p class="fine">© 2026 SopirAgen · Dibangun manusia + tim AI.</p></footer><script>
       const track = (name, props = {}) => {
         window.saEvents = window.saEvents || [];
-        window.saEvents.push({ name, props, at: new Date().toISOString() });
-        window.dispatchEvent(new CustomEvent('sopiragen:event', { detail: { name, props } }));
+        const event = { name, props, at: new Date().toISOString() };
+        window.saEvents.push(event);
+        try {
+          const history = JSON.parse(localStorage.getItem('sopiragen_events') || '[]');
+          localStorage.setItem('sopiragen_events', JSON.stringify([...history.slice(-99), event]));
+        } catch { /* Analytics tidak boleh mengganggu navigasi. */ }
+        window.dispatchEvent(new CustomEvent('sopiragen:event', { detail: event }));
       };
       window.saTrack = track;
       document.addEventListener('click', (event) => {
